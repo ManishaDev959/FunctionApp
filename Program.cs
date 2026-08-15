@@ -27,7 +27,7 @@ var connectionString =
     $"User Id={sqlUsername};" +
     $"Password={sqlPassword};" +
     "Encrypt=True;" +
-    "TrustServerCertificate=True;";
+    "TrustServerCertificate=False;";
 builder.Services.AddDbContext<OrderDbContext>(options =>
 {
     options.UseSqlServer(connectionString);

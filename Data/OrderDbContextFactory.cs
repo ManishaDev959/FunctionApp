@@ -9,8 +9,16 @@ public class OrderDbContextFactory : IDesignTimeDbContextFactory<OrderDbContext>
     {
         var optionsBuilder = new DbContextOptionsBuilder<OrderDbContext>();
 
-        optionsBuilder.UseSqlServer(
-            "Server=MANISHA\\SQLEXPRESS;Database=orderdb123;Trusted_Connection=True;TrustServerCertificate=True;");
+        var connectionString =
+            Environment.GetEnvironmentVariable("AzureSqlConnection");
+
+        if (string.IsNullOrWhiteSpace(connectionString))
+        {
+            throw new InvalidOperationException(
+                "AzureSqlConnection is not configured.");
+        }
+
+        optionsBuilder.UseSqlServer(connectionString);
 
         return new OrderDbContext(optionsBuilder.Options);
     }
