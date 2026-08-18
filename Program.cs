@@ -39,11 +39,11 @@ builder.Services.AddDbContext<OrderDbContext>(options =>
 });
 
 
-//var blobStorageConnection =
-//    builder.Configuration["BlobStorageConnection"];
+var blobStorageConnection =
+    builder.Configuration["BlobStorageConnection"];
 
-//builder.Services.AddSingleton(
-//    new BlobServiceClient(blobStorageConnection));
+builder.Services.AddSingleton(
+    new BlobServiceClient(blobStorageConnection));
 
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IBlobStorageService, BlobStorageService>();
