@@ -21,13 +21,18 @@ var sqlDatabase = builder.Configuration["SqlDatabase"];
 var sqlUsername = builder.Configuration["SqlUsername"];
 var sqlPassword = builder.Configuration["SqlPassword"];
 
+//var connectionString =
+//    $"Server={sqlServer};" +
+//    $"Database={sqlDatabase};" +
+//    $"User Id={sqlUsername};" +
+//    $"Password={sqlPassword};" +
+//    "Encrypt=True;" +
+//    "TrustServerCertificate=False;";
+
 var connectionString =
-    $"Server={sqlServer};" +
-    $"Database={sqlDatabase};" +
-    $"User Id={sqlUsername};" +
-    $"Password={sqlPassword};" +
-    "Encrypt=True;" +
-    "TrustServerCertificate=False;";
+          Environment.GetEnvironmentVariable("AzureSqlConnection");
+
+
 builder.Services.AddDbContext<OrderDbContext>(options =>
 {
     options.UseSqlServer(connectionString);
